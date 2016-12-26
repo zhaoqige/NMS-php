@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script type="text/javascript" src="res/jquery.min.js"></script>
+<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+<link rel="stylesheet" href="res/app.common.css" />
+<link rel="stylesheet" href="res/app.css" />
+<title>Field (Microsoft Bing Maps) v6.1.211216</title>
+</head>
+<body>
+<div class="box w100 h100">
+  <div id="nav" class="w100">
+    <div class="vi">
+        <a href="http://www.6harmonics.com/" title="6Harmonics: Connecting People & Things" target="_blank"><img class="logo-img circled" src="res/logo_64.jpg" /></a>
+    </div>
+    <div class="nav-block nav-links">
+        <ul class="nav-menu">
+            <li><a class="active" href="/home">Home</a></li>
+            <li><a href="/field6/bing.html">Field6</a></li>
+            <li><a href="/tools/">Tools</a></li>
+            <li><a href="/docs/">Docs</a></li>
+            <li><a href="/faq/">F.A.Q.</a></li>
+        </ul>
+    </div>
+    <div class="nav-block nav-ops">
+        <ul class="nav-menu">
+            <li><a id="btn-user" href="#">Me</a></li>
+            <li><a id="logout" href="#">Logout</a></li>
+        </ul>
+    </div>
+  </div>
+  <div id="sidebar" class="h100">
+  	<div id="user-profile" class="sidebar-block hide">
+    	<div class="user-box">
+        	<div class="avatar">
+            	<a href="/profile/"><img class="avatar circled" src="res/logo_64.jpg" /></a>
+            </div>
+            <div class="name">Qige Zhao</div>
+            <div class="level">Administrator</div>
+        </div>
+    </div>
+  	<div class="sidebar-block">
+    	<ul class="sidebar-menu">
+            <li><a class="w100" href="#">Home</a></li>
+            <li><a class="w100" href="/home">Maps Mode</a></li>
+        </ul>
+    	<ul class="sidebar-menu">
+        	<li><a class="w100" href="/devices/">Devices</a></li>
+        </ul>
+    </div>
+    <div id="dev-find" class="sidebar-block">
+    	<div class="dev-find-box">
+        	<h3>Find Device</h3>
+            <div class="form-row">
+            	<label for="dev-kw">Keyword:</label>
+                <input class="input w100" type="text" id="dev-find-kw" name="dev-find-kw">
+            </div>
+            <div class="form-row _fix-top">
+            	<button id="btn-dev-find" class="input primary">Search</button>
+            	<button id="btn-dev-find-close" class="input">Close</button>
+            </div>
+        </div>
+        <ul id="dev-find-list" class="dev-find-list w100 hide">
+            <li class="w100"><a href="#">00:5e:ac:00:5e:ac/192.168.1.21</a></li>
+            <li class="w100"><a href="#">00:5e:ac:00:5e:ad/192.168.1.22</a></li>
+            <li class="w100"><a href="#">00:5e:ac:00:5e:ae/192.168.1.23</a></li>
+            <li class="w100"><a href="#">00:5e:ac:00:5e:af/192.168.1.24</a></li>
+        </ul>
+    </div>
+    <div id="dev-profile" class="sidebar-block hide">
+    	<div class="dev-box">
+            <h3>Device Information</h3>
+            <div class="form-row">
+                <label for="dev-status">Status</label>
+                <input class="input error icon" type="text" id="dev-status" name="dev-status" readonly>
+            </div>
+            <div class="form-row">
+                <label for="dev-name">Device</label>
+                <input class="input w100" type="text" id="dev-name" name="dev-name" readonly>
+            </div>
+            <div class="form-row">
+                <label for="dev-peer">Peer</label>
+                <input class="input w100" type="text" id="dev-peer" name="dev-peer" readonly>
+            </div>
+            <div class="form-row">
+                <label for="dev-radio">Radio</label>
+                <input class="input w100" type="text" id="dev-radio" name="dev-radio" readonly>
+            </div>
+            <div class="form-row">
+                <label for="dev-link-rx">Link Rx</label>
+                <input class="input w100" type="text" id="dev-link-rx" name="dev-link-rx" readonly>
+            </div>
+            <div class="form-row">
+                <label for="dev-link-tx">Link Tx</label>
+                <input class="input w100" type="text" id="dev-link-tx" name="dev-link-tx" readonly>
+            </div>
+            <div class="form-row">
+                <label for="dev-uptime">Uptime</label>
+                <input class="input w100" type="text" id="dev-uptime" name="dev-uptime" readonly>
+            </div>
+            <div class="form-row box _fix-top">
+            	<button id="dev-profile-every5s" class="btn bad">Auto Update</button>
+            	<button id="dev-config" class="btn bad">Config</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div id="main" class="w100 h100">
+    <div id='map'></div>
+    <div class="stat w100">STAT</div>
+  </div>
+</div>
+<script type="text/javascript" src="res/nms4.bing.js"></script>
+<!-- Written by 6Harmonics/6WiLink Qige @ 2016.12.23 -->
+</body>
+</html>

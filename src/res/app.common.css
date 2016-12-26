@@ -1,0 +1,37 @@
+/* Common Style */
+*{box-sizing:border-box;margin:0;padding:0;}
+body,html,#map{width:100%;height:100%;margin:0;font:14px "Helvetica Neue", Helvetica, Arial, sans-serif;}
+body{position:relative;}
+a{display:inline-block;text-decoration:none;color:#2f4050;}
+label{display:inline-block;}
+ul,div{display:block;list-style:none;margin:0;padding:0;}
+li{display:inline-block;}
+.box{position:relative;}
+.w100,.h100{display:block;clear:both;margin:0;padding:0;}
+.w100{width:100%;}
+.h100{height:100%;}
+.w1002{width:1002px;margin:0 auto;}
+.fit{overflow:hidden;}
+.left{float:left;}
+.right{float:right;}
+.inline{display:inline-block;clear:none;}
+
+/* Defined Style: button, a; */
+.icon{width:30px;}
+.btn,.input{border:#e6e6e6 1px solid;border-radius:3px;background:#e6e6e6;}
+.btn{display:inline-block;padding:6px 12px;cursor:pointer;color:#333;text-align:center;text-decoration:none;}
+.input{padding:6px 8px;}
+.input:active,.input:focus{background:#fcfcfc;color:#333;}
+.form-row label,.form-row input{display:block;clear:both;margin:6px 0 3px;}
+.btn-group input{display:inline-block;width:20%;float:left;clear:none;text-align:right;border-radius:16px;}
+
+/* Common UI Style */
+.hide{display:none;}
+.show{display:inherit;}
+.circled{border-radius:50%;}
+.primary,.warning,.error{color:#fff;}
+.primary{border-color:#27ae60;background-color:#27ae60;}
+.warning{border-color:#2980b9;background-color:#2980b9;}
+.error{border-color:#c0392b;background-color:#c0392b;}
+.bad{border-color:#95a5a6;background-color:#666;color:#999;cursor:default;}
+

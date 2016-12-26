@@ -1,0 +1,40 @@
+#nav{height:52px;background:#fafafa;border-bottom:#263949 2px solid;}
+.vi{position:absolute;top:4px;left:6px;}
+.logo-img{width:42px;height:42px;}
+.nav-block{display:inline-block;}
+.nav-links{margin-left:58px;}
+.nav-menu li{padding:8px 0;}
+.nav-menu a{padding:8px 16px;border-radius:4px;}
+.nav-menu .active,.nav-menu a:hover{background:#263949;color:#fff;}
+.nav-ops{margin-right:6px;float:right;}
+
+.login{width:360px;margin:36px auto;padding:0 24px;background:#2f4050;color:#eee;border:#ccc 1px solid;border-radius:16px;}
+.login .form-row{margin:24px auto;}
+
+#footer{position:fixed;bottom:0;background:#fafafa;border-top:#f3f3f3 2px solid;}
+#footer p{line-height:2em;text-align:center;}
+
+#sidebar{position:fixed;background:#2f4050;width:220px;padding-top:6px;}
+.sidebar-block{margin-top:2px;}
+.sidebar-menu{border-bottom:#2f4050 2px solid;}
+.sidebar-menu li{display:block;border-left:#a7b1c2 4px solid;}
+.sidebar-menu a{color:#fff;padding:8px 16px;}
+.sidebar-menu a:hover{color:#fff;background-color:#333;}
+
+.user-box{background:#293846;padding:12px 36px 18px;}
+.name,.level{margin-top:6px;color:#a7b1c2;}
+.avatar{width:64px;height:64px;}
+
+.dev-find-box{color:#ccc;background:#293846;padding:6px 10px 10px;}
+.dev-find-list{color:#000;background:#f3f3f3;}
+.dev-find-list li{border-bottom:#2f4050 1px dashed;}
+.dev-find-list a{padding:6px;width:100%;}
+.dev-find-list a:hover{color:#ccc;background:#2f4050;}
+
+._fix-top{margin-top:8px;}
+
+#main{position:fixed;margin-left:220px;}
+.main-full{margin-left:0;}
+
+/* Maps Control */
+#map{position:fixed;margin-bottom:60px;}
