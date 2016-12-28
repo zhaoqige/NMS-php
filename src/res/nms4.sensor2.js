@@ -1,10 +1,11 @@
 // 6Harmonics Qige
 // Microsoft Bing Maps API v7
 // 2016.12.23: + jQuery, add jQuery functions, add "#sidebar"
+// 2016.12.28: + Sensor
 
 var _appVersion = 'NMS (Microsoft Bing Maps) v4.0.281216';
 var _appLat = 40.0492, _appLng = 116.2902;
-var _bingMap = null, _mapConfig = null, _currentSensorSN = '', _currentSensorInfobox;
+var _bingMap = null, _mapConfig = null, _currentSensorSN = '', _currentSensorInfobox = null;
 
 var _author = 'Designed by 6WiLink Qige', _address = 'Address: Suit 3B-1102/1105, Z-Park, Haidian Dist., Beijing, China';
 
@@ -114,16 +115,16 @@ var _author = 'Designed by 6WiLink Qige', _address = 'Address: Suit 3B-1102/1105
 			} else {
 				console.log(_author + '; ' + _address);
 				var devInfobox = this.infobox(_bingMap.getCenter(), _author, _address, true);
-				devInfobox.setOptions({ showCloseButton: false });
+				devInfobox.setOptions({ visible: true, showCloseButton: false });
 				_bingMap.entities.push(devInfobox);
 			}
 		},
-		showInfobox: function(e) {
+		showInfobox: function(e) {      
       if (_currentSensorInfobox) {
         _currentSensorInfobox.setOptions({ visible: false });
-        delete _currentSensorInfobox;
+        delete(_currentSensorInfobox);
       };
-      
+
 			var obj = e.target;
       var pos = obj.getLocation();
       _currentSensorSN = obj.sn;
@@ -158,6 +159,7 @@ var _author = 'Designed by 6WiLink Qige', _address = 'Address: Suit 3B-1102/1105
 $(document).ready(function() {
 	// init basic values
 	console.log(_appVersion);
+  //$.app.init();
 
 	// default settings
 	_mapConfig = {
@@ -174,5 +176,5 @@ $(document).ready(function() {
   $.app.update();
   // update every 30 seconds, sensor api update every 60 seconds
 	//setInterval("$.app.update()", 30000);
-	setInterval("$.app.update()", 2000); // DEBUG USE ONLY
+	setInterval("$.app.update()", 5000); // DEBUG USE ONLY
 });

@@ -1,10 +1,13 @@
 // 6Harmonics Qige
 // Microsoft Bing Maps API v7
 // 2016.12.23: + jQuery, add jQuery functions, add "#sidebar"
+// 2016.12.28: + Sensor
 
 var _appVersion = 'NMS (Microsoft Bing Maps) v4.0.281216';
 var _appLat = 40.0492, _appLng = 116.2902;
 var _bingMap = null, _mapConfig = null, _currentSensorSN = '';
+
+var _author = 'Designed by 6WiLink Qige', _address = 'Address: Suit 3B-1102/1105, Z-Park, Haidian Dist., Beijing, China';
 
 
 // window.location.href
@@ -50,33 +53,35 @@ var _bingMap = null, _mapConfig = null, _currentSensorSN = '';
 		error: function(msg) {
       $('#sensor-status').removeClass('bad error primary warning').addClass('bad');
 			$('#sensor-ts').addClass('error').val(msg);
+      console.log(msg);
 		},
     update: function() {
       console.log('updated at: ' + new Date());
-      $.get('data/_data.php', { k: 'sensor' }, function(resp) { //console.dir(resp);
-          //console.log('- ajax json data fetched & valid');
-          if (typeof(resp.map) != 'undefined' && typeof(resp.map.center) != 'undefined') {
-            _mapConfig.zoomLevel = resp.map.zoom; //console.log('-- update map');
-            if (_mapConfig.center) {
-              delete(_mapConfig.center); //console.log('- release old center');
-            }
-            _mapConfig.center = $.MicrosoftMap.pos(resp.map.center.lat, resp.map.center.lng);
+      $.get('data/_data.php', { k: 'sensor' }, function(resp) {
+        //console.log('- ajax json data fetched & valid'); console.dir(resp);
+        if (typeof(resp.map) != 'undefined' && typeof(resp.map.center) != 'undefined') {
+          _mapConfig.zoomLevel = resp.map.zoom; //console.log('-- update map');
+          if (_mapConfig.center) {
+            delete(_mapConfig.center); //console.log('- release old center');
           }
-          if (typeof(resp.points) != 'undefined') {
-            _mapConfig.points = resp.points;
-          } else {
-            console.log('invalid data');
-            $.app.error('File Format Invalid');	
-          }
-          
-          // clear & add new icons
-          $.MicrosoftMap.sync(_mapConfig.points); 
-          // move & zoom
-          if (_currentSensorSN == '') {
-            $.MicrosoftMap.setView({ center: _mapConfig.center, zoom: _mapConfig.zoomLevel });
-            _currentSensorSN = ' ';
-          }
-        },'json');      
+          _mapConfig.center = $.MicrosoftMap.pos(resp.map.center.lat, resp.map.center.lng);
+        }
+        if (typeof(resp.points) != 'undefined') {
+          _mapConfig.points = resp.points;
+        } else {
+          $.app.error('File Format Invalid');	
+          _mapConfig.points = null;
+        }
+        
+        // move & zoom
+        if (_currentSensorSN == '') {
+          $.MicrosoftMap.setView({ center: _mapConfig.center, zoom: _mapConfig.zoomLevel });
+          _currentSensorSN = ' ';
+        }
+      },'json');
+        
+      // clear & add new icons
+      $.MicrosoftMap.sync(_mapConfig.points); 
     }
 	};
 }) (jQuery);
@@ -100,7 +105,8 @@ var _bingMap = null, _mapConfig = null, _currentSensorSN = '';
 			//console.dir(data);
       //console.log('$.MicrosoftMap.icons(): update');
       _bingMap.entities.clear();
-			if ($.isArray(data)) {				
+			if ($.isArray(data)) {
+        //console.dir(data);
 				var idx = 0;
 				for(idx in data) {
 					var obj = data[idx];
@@ -123,9 +129,8 @@ var _bingMap = null, _mapConfig = null, _currentSensorSN = '';
 					_bingMap.entities.push(pin);
 				}
 			} else {
-				//console.log('$.MicrosoftMap.icons(): default');
-				var devInfobox = this.infobox(_bingMap.getCenter(), 'Designed by 6WiLink Qige', 
-						'Address: Suit 3B-1102/1105, Z-Park, Haidian Dist., Beijing, China', true);
+				console.log(_author + '; ' + _address);
+				var devInfobox = this.infobox(_bingMap.getCenter(), _author, _address, true);
 				devInfobox.setOptions({ showCloseButton: false });
 				_bingMap.entities.push(devInfobox);
 			}
@@ -134,12 +139,12 @@ var _bingMap = null, _mapConfig = null, _currentSensorSN = '';
 			//console.log('-- add infobox after pin clicked');
 			var obj = e.target;
       var pos = obj.getLocation();
-      _bingMap.setView({ center: pos, zoom: 18 });
       
       _currentSensorSN = obj.sn;
 
       $.app.sync(obj);
       $('#infobox').show();
+      _bingMap.setView({ center: pos, zoom: 18 });
 		},
     infobox: function(center, title, msg, visible) {
       return (new Microsoft.Maps.Infobox(center, {
@@ -167,16 +172,11 @@ var _bingMap = null, _mapConfig = null, _currentSensorSN = '';
 $(document).ready(function() {
 	// init basic values
 	console.log(_appVersion);
-	_file = $.url.get('f');
-	_type = $.url.get('t');
-	
-	if (! _file) _file = 'demo.log';
-	if (! _type) _type = 1;
-	$.app.init(_file, _type);
+	$.app.init();
 	
 	// default settings
 	_mapConfig = {
-		center: $.MicrosoftMap.pos(_appLat,_appLng),
+		center: $.MicrosoftMap.pos(_appLat, _appLng),
 		zoomLevel: 16, points: null, msg: null
 	};
   
@@ -187,6 +187,7 @@ $(document).ready(function() {
 	// fetch data & add points (icon)
 	//console.log('parse file into array: '+_file);
   $.app.update();
+  
   // update every 30 seconds, sensor api update every 60 seconds
 	//setInterval("$.app.update()", 30000);
 	setInterval("$.app.update()", 5000); // DEBUG USE ONLY

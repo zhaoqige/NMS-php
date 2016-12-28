@@ -7,6 +7,9 @@ var _appLat = 40.0492, _appLng = 116.2902;
 var _page = 'bing.html', _file = '', _type = 1;
 var _bingMap = null, _mapConfig = null;
 
+var _author = 'Designed by 6WiLink Qige', _address = 'Address: Suit 3B-1102/1105, Z-Park, Haidian Dist., Beijing, China';
+
+
 // window.location.href
 (function($) {
 	$.url = {
@@ -120,10 +123,12 @@ var _bingMap = null, _mapConfig = null;
 				}
 			} else {
 				//console.log('$.MicrosoftMap.icons(): default');
-				var devInfobox = this.infobox(_bingMap.getCenter(), 'Designed by 6WiLink Qige', 
-						'Address: Suit 3B-1102/1105, Z-Park, Haidian Dist., Beijing, China', true);
+				var devInfobox = this.infobox(_bingMap.getCenter(), _author, _address, true);
 				devInfobox.setOptions({ showCloseButton: false });
 				_bingMap.entities.push(devInfobox);
+        
+        var pos = this.pos(_appLat, _appLng + 0.01);
+        _bingMap.setView(pos);
 			}
 		},
 		showInfobox: function(e) {
@@ -201,10 +206,10 @@ $(document).ready(function() {
 			console.log('invalid data');
 			$.app.error('File Format Invalid');	
 		}
-		
-    // clear & add new icons
-		$.MicrosoftMap.sync(_mapConfig.points); 
     // move & zoom
 		$.MicrosoftMap.setView({ center: _mapConfig.center, zoom: _mapConfig.zoomLevel });
 	},'json');
+		
+  // clear & add new icons
+  $.MicrosoftMap.sync(_mapConfig.points); 
 });
