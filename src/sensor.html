@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script type="text/javascript" src="res/jquery.min.js"></script>
+<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+<link rel="stylesheet" href="res/app.common.css" />
+<link rel="stylesheet" href="res/app.css" />
+<title>NMS4 Dust Sensor (Microsoft Bing Maps) v4.0.281216</title>
+</head>
+<body>
+<div class="box w100 h100">
+  <div id="nav" class="w100">
+    <div class="vi">
+        <a href="http://www.6harmonics.com/" title="6Harmonics: Connecting People & Things" target="_blank"><img class="logo-img circled" src="res/logo_64.jpg" /></a>
+    </div>
+    <div class="nav-block nav-links">
+        <ul class="nav-menu">
+            <li><a href="/field6/bing.html">Field6</a></li>
+            <li><a href="/nms4/bing.html">NMS4</a></li>
+            <li><a class="active" href="/nms4/sensor.html">Sensors</a></li>
+            <li><a href="/nms4/sensor2.html">Sensors2</a></li>
+        </ul>
+    </div>
+    <div class="nav-block nav-ops">
+        <ul class="nav-menu">
+            <li><a id="btn-user" href="#">Me</a></li>
+            <li><a id="logout" href="#">Logout</a></li>
+        </ul>
+    </div>
+  </div>
+  <div id="infobox" class="infobox hide">
+    <div class="infobox-detail">
+      <h3>Air Indicator</h3>
+      <div class="form-row">
+          <label for="sensor-status">Status</label>
+          <input class="input error icon" type="text" id="sensor-status" name="dev-status" readonly>
+      </div>
+      <div class="form-row">
+          <label for="dev-name">Device</label>
+          <input class="input w100" type="text" id="sensor-name" name="sensor-name" readonly>
+      </div>
+      <div class="form-row">
+          <label for="sensor-noise">Noise</label>
+          <input class="input w100" type="text" id="sensor-noise" name="sensor-noise" readonly>
+      </div>
+      <div class="form-row">
+          <label for="sensor-pm">PM 2.5/PM 10</label>
+          <input class="input w100" type="text" id="sensor-pm" name="sensor-pm" readonly>
+      </div>
+      <div class="form-row">
+          <label for="sensor-temp">Temperature</label>
+          <input class="input w100" type="text" id="sensor-temp" name="sensor-temp" readonly>
+      </div>
+      <div class="form-row">
+          <label for="sensor-ts">Timestamp</label>
+          <input class="input w100" type="text" id="sensor-ts" name="sensor-ts" readonly>
+      </div>
+      <div class="form-row box _fix-top">
+        <button id="btn-sensor-close" class="btn">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="main" class="main-full w100 h100">
+    <div id='map'></div>
+  </div>
+</div>
+<script type="text/javascript" src="res/nms4.sensor.js"></script>
+<!-- Written by 6Harmonics/6WiLink Qige @ 2016.12.28 -->
+</body>
+</html>

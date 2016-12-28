@@ -31,10 +31,13 @@
 .dev-find-list a{padding:6px;width:100%;}
 .dev-find-list a:hover{color:#ccc;background:#2f4050;}
 
+
+.infobox{background:#2f4050;position:fixed;top:82px;left:0;z-index:8888;}
+.infobox-detail {padding:8px 8px 10px;color:#f3f3f3;}
+
 ._fix-top{margin-top:8px;}
 
-#main{position:fixed;margin-left:220px;}
-.main-full{margin-left:0;}
-
 /* Maps Control */
+#main{position:fixed;margin-left:220px;}
+.main-full{margin-left:0 !important;}
 #map{position:fixed;margin-bottom:60px;}
