@@ -40,6 +40,7 @@ final class AppNMS4 implements IApp
 			$this->_env['limit'] = $this->_envRespLimit;
 		}
 	}
+	
 	private function parseEnv($env = null)
 	{
 		if (is_array($env)) {
@@ -59,7 +60,7 @@ final class AppNMS4 implements IApp
 	{
 		// check resource
 		if (! $this->_nms4Res) {
-			$this->_nms4Res = new NMS4Resource();
+			$this->_nms4Res = new NMS4Res();
 		}
 	}
 	private function initSensorRes()
@@ -96,6 +97,7 @@ final class AppNMS4 implements IApp
 						$condition['kw'] = $env['kw'];
 					}
 				case 'map':
+					$condition['bMap'] = true;
 				case 'list':
 				default:
 					$data = $this->fetchDevices($condition);
@@ -139,6 +141,7 @@ final class AppNMS4 implements IApp
 		}
 		return $data;
 	}
+	
 	private function fetchUser($keyedConditions)
 	{
 		$data = null;
@@ -162,7 +165,6 @@ final class AppNMS4 implements IApp
 		
 		return $data;
 	}
-	
 }
 
 ?>

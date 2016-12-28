@@ -4,6 +4,7 @@
 'use strict';
 require_once 'limit.data.php';
 
+
 /**
  * Design Pattern: Singleton
  * @desc	only setup single database connection
@@ -24,10 +25,11 @@ final class _Database implements IBaseDatabase
 
 	private function __construct($uri, $user, $passwd, $database, $port)
 	{
+		if (! function_exists('mysqli_connect')) return null;
 		$this->_connection = mysqli_connect($uri, $user, $passwd, $database, $port);
 	}
 
-	static final public function getInstance($uri = 'localhost', $user = 'root', $passwd = '',
+	final static public function getInstance($uri = 'localhost', $user = 'root', $passwd = '',
 			$database = 'nms3', $port = 3306)
 	{
 		if (! self::$_instance instanceof self) {
@@ -65,7 +67,7 @@ final class _Database implements IBaseDatabase
  * @version 1.1.011216
  * @tested	2016.12.27 v1.1.271216b
  */
-abstract class _DAO
+abstract class _baseDAO
 {
 	protected $_sqlCharset = 'set names "utf8"';
 

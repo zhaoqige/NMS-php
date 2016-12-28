@@ -3,7 +3,7 @@
 
 'use strict';
 require_once 'limit.data.php';
-require_once 'base.dao.php';
+require_once 'class.nms4.dao.php';
 
 /**
  * App NMS4 Resource
@@ -13,13 +13,13 @@ require_once 'base.dao.php';
  * @version 	1.1.271216a
  * @verified 	-
  */
-final class NMS4Resource implements IAppNMS4
+final class NMS4Res implements INMS4
 {
 	private $_query = null;
 	
 	public function __construct()
 	{
-		$this->_query = AppDAO::getInstance();
+		$this->_query = NMS4DAO::getInstance();
 	}
 	
 	public function fetchDevices($keyedConditions = null)
@@ -30,9 +30,18 @@ final class NMS4Resource implements IAppNMS4
 		return $result;
 	}
 	
-	public function fetchUser($keyedConditions = null) {}
-	public function setDevice($keyedRecord = null) {}
-	public function setUser($keyedRecord = null) {}
+	public function fetchUser($keyedConditions = null)
+	{
+		return null;
+	}
+	public function setDevice($keyedRecord = null)
+	{
+		return null;
+	}
+	public function setUser($keyedRecord = null)
+	{
+		return null;
+	}
 }
 
 ?>

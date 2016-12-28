@@ -88,8 +88,8 @@ final class AppSensor implements ISingleton, ISensor
 		$_result = array();
 		
 		foreach($sensors as $sensor) {
-			$key = Http::param($sensor['token']);
-			$data = Http::request($url, $key);
+			$key = HTTP::param($sensor['token']);
+			$data = HTTP::request($url, $key);
 			//$data = iconv('UTF-8', 'GB2312', $data);
 			$_result['sensor']['dust'][] = array(
 					'data' => $data,

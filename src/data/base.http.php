@@ -6,7 +6,7 @@ require_once 'limit.data.php';
 require_once 'format.json.php';
 
 
-final class Http
+final class HTTP
 {
 	static public function request($url, $data = null, $method = 'POST')
 	{
@@ -14,14 +14,14 @@ final class Http
 		
 		if ($url) {
 			$opts = array(
-					'http' => array(
-							'method' => 'POST',
-							'header' => 'Content-type: application/x-www-form-urlencoded',
-							'Accept' => 'Accept: text/plain',
-							'timeout' => 3,
-							//'proxy' => '',
-							'content' => $data
-					)
+				'http' => array(
+					'method' => 'POST',
+					'header' => 'Content-type: application/x-www-form-urlencoded',
+					'Accept' => 'Accept: text/plain',
+					'timeout' => 3,
+					//'proxy' => '',
+					'content' => $data
+				)
 			);
 			$context = stream_context_create($opts);
 			$result = file_get_contents($url, false, $context, -1, 1024);

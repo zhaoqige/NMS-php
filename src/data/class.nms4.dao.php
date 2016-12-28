@@ -13,7 +13,7 @@ require_once 'abs.data.db.php';
  * @version 1.1.301116a
  * @verified 2016.11.30
  */
-final class AppDAO extends _DAO implements IBaseDAO
+final class NMS4DAO extends _baseDAO implements IBaseDAO
 {
 	static private $_instance = null;
 	private $_connection;

@@ -4,13 +4,19 @@
 'use strict';
 
 
+/**
+ * @desc	Design Patten: Singleton
+ * @author 	QZ
+ * @version 1.0.281216
+ */
 interface ISingleton
 {
 	static public function getInstance();
 }
 
+
 /**
- * @desc	Database Limit
+ * @desc	Database Connections
  * @author 	QZ
  * @version 1.1.301116
  */
@@ -20,14 +26,25 @@ interface IBaseDatabase extends ISingleton
 	public function close();
 }
 
+
+/**
+ * @desc	Basic Data Queries
+ * 
+ * @author 	QZ
+ * @version 1.1.281216
+ */
 interface IBaseDAO
 {
-	public function update($keyedArray);
-	public function fetch($keyedArray);
+	public function update($keyedParams);
+	public function fetch($keyedParams);
 }
 
 
-
+/**
+ * @desc	json/xml/csv/ini
+ * @author 	QZ
+ * @version 1.1.281216
+ */
 interface IDataFormat
 {
 	static public function decode($string);
@@ -35,13 +52,24 @@ interface IDataFormat
 }
 
 
+/**
+ * @desc	ajax/http request
+ * @author 	QZ
+ * @version 1.1.281216
+ */
 interface IApp
 {
 	public function __construct();
-	public function exec($env = null);
+	public function exec($keyedParams);
 }
 
-interface IAppNMS4
+
+/**
+ * @desc	Network Management System
+ * @author 	QZ
+ * @version 1.0.281216
+ */
+interface INMS4
 {
 	public function fetchDevices($keyedCondistions);
 	public function setDevice($keyedRecord);
