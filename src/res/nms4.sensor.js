@@ -37,51 +37,51 @@ var _author = 'Designed by 6WiLink Qige', _address = 'Address: Suit 3B-1102/1105
 
 			$('#btn-sensor-close').click(function() {
 				$('#infobox').hide();
-        _currentSensorSN = '';
+				_currentSensorSN = '';
 			});
 		},
-		sync: function(obj) { console.dir(obj);
+		sync: function(obj) { //console.dir(obj);
 			if (typeof(obj) != 'undefined') {
-        $('#sensor-status').removeClass('bad error primary warning').removeClass('level0 level1 level2 level3 level4').addClass(obj.status);
-        $('#sensor-name').val(obj.name);
-        $('#sensor-noise').val(obj.noise);
-        $('#sensor-pm').val(obj.pm);
-        $('#sensor-temp').val(obj.temp);
-        $('#sensor-ts').removeClass('bad error primary warning').val(obj.ts);
+				$('#sensor-status').removeClass('bad error primary warning').removeClass('level0 level1 level2 level3 level4').addClass(obj.status.toLowerCase());
+				$('#sensor-name').val(obj.name);
+				$('#sensor-noise').val(obj.noise);
+				$('#sensor-pm').val(obj.pm);
+				$('#sensor-temp').val(obj.temp);
+				$('#sensor-ts').removeClass('bad error primary warning').val(obj.ts);
 			}
 		},
 		error: function(msg) {
-      $('#sensor-status').removeClass('bad error primary warning').addClass('bad');
+			$('#sensor-status').removeClass('bad error primary warning').addClass('bad');
 			$('#sensor-ts').addClass('error').val(msg);
-      console.log(msg);
+			console.log(msg);
 		},
-    update: function() {
-      console.log('updated at: ' + new Date());
-      $.get('data/_data.php', { k: 'sensor' }, function(resp) {
-        //console.log('- ajax json data fetched & valid'); console.dir(resp);
-        if (typeof(resp.map) != 'undefined' && typeof(resp.map.center) != 'undefined') {
-          _mapConfig.zoomLevel = resp.map.zoom; //console.log('-- update map');
-          if (_mapConfig.center) {
-            delete(_mapConfig.center); //console.log('- release old center');
-          }
-          _mapConfig.center = $.MicrosoftMap.pos(resp.map.center.lat, resp.map.center.lng);
-        }
-        if (typeof(resp.points) != 'undefined') {
-          _mapConfig.points = resp.points;
-        } else {
-          $.app.error('File Format Invalid');	
-          _mapConfig.points = null;
-        }
+		update: function() {
+			console.log('updated at: ' + new Date());
+			$.get('data/data.php', { k: 'sensor' }, function(resp) {
+				//console.log('- ajax json data fetched & valid'); console.dir(resp);
+				if (typeof(resp.map) != 'undefined' && typeof(resp.map.center) != 'undefined') {
+					_mapConfig.zoomLevel = resp.map.zoom; //console.log('-- update map');
+					if (_mapConfig.center) {
+						delete(_mapConfig.center); //console.log('- release old center');
+					}
+					_mapConfig.center = $.MicrosoftMap.pos(resp.map.center.lat, resp.map.center.lng);
+				}
+				if (typeof(resp.points) != 'undefined') {
+					_mapConfig.points = resp.points;
+				} else {
+					$.app.error('File Format Invalid');	
+					_mapConfig.points = null;
+				}
                 
-        // clear & add new icons
-        $.MicrosoftMap.sync(_mapConfig.points); // fix <ISSUE#1>
-        // move & zoom
-        if (_currentSensorSN == '') {
-          $.MicrosoftMap.setView({ center: _mapConfig.center, zoom: _mapConfig.zoomLevel });
-          _currentSensorSN = ' ';
-        }
-      },'json');
-    }
+				// clear & add new icons
+				$.MicrosoftMap.sync(_mapConfig.points); // fix <ISSUE#1>
+				// move & zoom
+				if (_currentSensorSN == '') {
+					$.MicrosoftMap.setView({ center: _mapConfig.center, zoom: _mapConfig.zoomLevel });
+					_currentSensorSN = ' ';
+				}
+			},'json');
+		}
 	};
 }) (jQuery);
 
@@ -102,27 +102,27 @@ var _author = 'Designed by 6WiLink Qige', _address = 'Address: Suit 3B-1102/1105
 		sync: function(data) {
 			//console.log('$.MicrosoftMap.sync()');
 			//console.dir(data);
-      //console.log('$.MicrosoftMap.icons(): update');
-      _bingMap.entities.clear();
+			//console.log('$.MicrosoftMap.icons(): update');
+			_bingMap.entities.clear();
 			if ($.isArray(data)) {
-        //console.dir(data);
+				//console.dir(data);
 				var idx = 0;
 				for(idx in data) {
 					var obj = data[idx];
 					var pos = this.pos(obj.pos.lat, obj.pos.lng);
 					var pin = this.pushpin(pos, 'res/dust-' + obj.level + '.png');
           
-          pin.status = obj.status;
-          pin.sn = obj.sn;
-          pin.name = obj.name + obj.sn;
+					pin.status = obj.status;
+					pin.sn = obj.sn;
+					pin.name = obj.name + obj.sn;
 					pin.noise = obj.noise;
-          pin.pm = obj.pm;
-          pin.temp = obj.temp;
-          pin.ts = obj.ts;
+					pin.pm = obj.pm;
+					pin.temp = obj.temp;
+					pin.ts = obj.ts;
           
-          if (_currentSensorSN != '' && _currentSensorSN == obj.sn) {
-            $.app.sync(pin);
-          }
+					if (_currentSensorSN != '' && _currentSensorSN == obj.sn) {
+						$.app.sync(pin);
+					}
 
 					Microsoft.Maps.Events.addHandler(pin, 'click', this.showInfobox);
 					_bingMap.entities.push(pin);
@@ -137,22 +137,22 @@ var _author = 'Designed by 6WiLink Qige', _address = 'Address: Suit 3B-1102/1105
 		showInfobox: function(e) {
 			//console.log('-- add infobox after pin clicked');
 			var obj = e.target;
-      var pos = obj.getLocation();
-      
-      _currentSensorSN = obj.sn;
+			var pos = obj.getLocation();
 
-      $.app.sync(obj);
-      $('#infobox').show();
-      _bingMap.setView({ center: pos, zoom: 18 });
+			_currentSensorSN = obj.sn;
+
+			$.app.sync(obj);
+			$('#infobox').show();
+			_bingMap.setView({ center: pos, zoom: 18 });
 		},
-    infobox: function(center, title, msg, visible) {
-      return (new Microsoft.Maps.Infobox(center, {
-        title: title,
-        description: msg,
-        visible: visible,
-        width: 480, height: 90
-      }));
-    },
+		infobox: function(center, title, msg, visible) {
+			return (new Microsoft.Maps.Infobox(center, {
+				title: title,
+				description: msg,
+				visible: visible,
+				width: 480, height: 90
+			}));
+		},
 		pushpin: function(center, icon) {
 			return (new Microsoft.Maps.Pushpin(center, { 
 				icon: icon, width: 19, height: 25
@@ -185,9 +185,9 @@ $(document).ready(function() {
 
 	// fetch data & add points (icon)
 	//console.log('parse file into array: '+_file);
-  $.app.update();
-  
-  // update every 30 seconds, sensor api update every 60 seconds
-	//setInterval("$.app.update()", 30000);
-	setInterval("$.app.update()", 5000); // DEBUG USE ONLY
+	$.app.update();
+	
+	// update every 30 seconds, sensor api update every 300 seconds
+	setInterval("$.app.update()", 30000);
+	//setInterval("$.app.update()", 5000); // DEBUG USE ONLY
 });
