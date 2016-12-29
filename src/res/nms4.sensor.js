@@ -72,16 +72,15 @@ var _author = 'Designed by 6WiLink Qige', _address = 'Address: Suit 3B-1102/1105
           $.app.error('File Format Invalid');	
           _mapConfig.points = null;
         }
-        
+                
+        // clear & add new icons
+        $.MicrosoftMap.sync(_mapConfig.points); 
         // move & zoom
         if (_currentSensorSN == '') {
           $.MicrosoftMap.setView({ center: _mapConfig.center, zoom: _mapConfig.zoomLevel });
           _currentSensorSN = ' ';
         }
       },'json');
-        
-      // clear & add new icons
-      $.MicrosoftMap.sync(_mapConfig.points); 
     }
 	};
 }) (jQuery);
