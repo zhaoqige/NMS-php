@@ -26,7 +26,7 @@ final class _Database implements IBaseDatabase
 	private function __construct($uri, $user, $passwd, $database, $port)
 	{
 		if (! function_exists('mysqli_connect')) return null;
-		$this->_connection = mysqli_connect($uri, $user, $passwd, $database, $port);
+		$this->_connection = @ mysqli_connect($uri, $user, $passwd, $database, $port);
 	}
 
 	final static public function getInstance($uri = 'localhost', $user = 'root', $passwd = '',

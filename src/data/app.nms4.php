@@ -3,7 +3,8 @@
 
 'use strict';
 require_once 'limit.data.php';
-//require_once 'base.latlng.php';
+require_once 'bar.point.php';
+require_once 'bar.latlng.php';
 require_once 'class.nms4.php';
 require_once 'class.sensor.php';
 
@@ -111,7 +112,7 @@ final class AppNMS4 implements IApp
 			}
 			
 			// save result
-			$_result['data'] = $data;
+			$_result = $data;
 			$error = '';
 				
 			// free up
@@ -158,9 +159,33 @@ final class AppNMS4 implements IApp
 	{
 		$data = null;
 		
+		// fetch sensor data
 		$this->initSensorRes();
 		if ($this->_sensorRes) {
-			$data = $this->_sensorRes->update();
+			$sensors = $this->_sensorRes->update();
+		}
+		
+		// check & calc map data
+		if (is_array($sensors)) { //var_dump($sensors);
+			
+			// calc map data
+			$map = array();
+			BarPoint::Init();
+			BarLatLng::Init();
+			foreach($sensors as & $sensor) {
+				BarPoint::Push($sensor, 5); // 5: ViReady Sensors
+				BarLatLng::Push($sensor['pos']);
+			}
+			$map = BarLatLng::Result();
+			
+			$data['points'] = $sensors;
+			$data['map'] = array(
+				'zoom' => $map['zoom'],
+				'center' => array(
+					'lat' => $map['lat'],
+					'lng' => $map['lng']
+				)
+			);
 		}
 		
 		return $data;

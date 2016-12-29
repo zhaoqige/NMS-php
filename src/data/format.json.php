@@ -7,6 +7,8 @@ require_once 'limit.data.php';
 /**
  * PHP7, PHP >= 5.2.0, PECL json >= 1.2.0
  * json_encode():	$opt need PHP >= 5.4
+ * code sample: 
+		if (version_compare("5.3", PHP_VERSION, ">"))
  *
  * @desc	json_encode(), json_decode()
  * @author 	QZ

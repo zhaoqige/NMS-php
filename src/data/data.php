@@ -8,6 +8,7 @@ define('TASKLET_ID', 'DATA');
 // ob_start();
 
 'use strict';
+date_default_timezone_set('PRC'); // set timezone
 require_once 'base.filter.php';
 require_once 'format.json.php';
 require_once 'app.nms4.php';
@@ -41,9 +42,14 @@ $_env = array(
 
 $app = new AppNMS4($_env);
 $_result = $app->exec();
+//var_dump($_result);
 
 // prepare OUTPUT
-$_resultString = JSON::encode($_result, JSON_UNESCAPED_UNICODE);
+if (version_compare("5.3", PHP_VERSION, ">")) {
+	$_resultString = JSON::encode($_result, JSON_UNESCAPED_UNICODE);
+} else {
+	$_resultString = JSON::encode($_result);
+}
 
 
 // connection desc

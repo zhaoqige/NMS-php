@@ -24,7 +24,7 @@ final class HTTP
 				)
 			);
 			$context = stream_context_create($opts);
-			$result = file_get_contents($url, false, $context, -1, 1024);
+			$result = @ file_get_contents($url, false, $context, -1, 1024);
 
 			$result = self::_utf8($result);	
 			$result = JSON::decode($result);
@@ -45,8 +45,11 @@ final class HTTP
 	
 	static public function _utf8($data)
 	{
-		$cs = mb_detect_encoding($data);
-		$result = iconv($cs, 'UTF-8', $data);
+		$result = $data;
+		if (function_exists('mb_detect_encoding')) {
+			$cs = mb_detect_encoding($result);
+			$result = iconv($cs, 'UTF-8', $result);
+		}
 		
 		//$data = urldecode($data);
 		//$result = mb_convert_encoding($data, 'GB2312', 'UTF-8');

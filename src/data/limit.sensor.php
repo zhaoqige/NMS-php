@@ -11,7 +11,19 @@
  */
 interface ISensor
 {
-	public function update($keyedParams);
+	public function Sensors();
+	public function Update($keyedSensors = null);
+}
+
+/**
+ * @desc	Limit for Sensor Vendor
+ * @author 	QZ
+ * @version 1.0.291216
+ */
+interface ISensorVendor
+{
+	static public function Sensors();
+	static public function Update($keyedSensors = null);
 }
 
 ?>
