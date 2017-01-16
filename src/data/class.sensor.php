@@ -35,6 +35,7 @@ final class AppSensor implements ISingleton
 	private function __construct()
 	{
 		$this->_sensors[] = ViReady::sensors();
+		//$this->_sensors[] = _6WiLink::sensors();
 	}
 	
 	public function update($keyedParams = null)
@@ -50,6 +51,9 @@ final class AppSensor implements ISingleton
 					// fetch data via webservice
 					// re-organize $data format
 					$_result = ViReady::Update($sensor);
+					break;
+				case '_6WiLink':
+				default:
 					break;
 			}
 		}

@@ -140,6 +140,10 @@ final class AppNMS4 implements IApp
 		if ($this->_nms4Res) {
 			$data = $this->_nms4Res->fetchUser($keyedConditions);
 		}
+		
+		// re-assemble data here
+		//
+		
 		return $data;
 	}
 	
