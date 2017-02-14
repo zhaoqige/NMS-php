@@ -1,5 +1,6 @@
 <?php
 
+// sample data
 $data = array(
 	'map' => array(
 		'zoom' => 18,
@@ -40,6 +41,7 @@ $data = array(
 	)
 );
 
+// debug use only
 //var_dump($data);
 echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
